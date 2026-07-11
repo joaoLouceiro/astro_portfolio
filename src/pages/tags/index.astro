@@ -1,18 +1,16 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-import "../styles/global.css";
+const allPosts = Object.values(
+  import.meta.glob("../posts/*.md", { eager: true }),
+);
 
-const { frontmatter } = Astro.props;
-
-const tags = frontmatter.tags;
+const tags = [
+  ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
+];
 ---
 
 <style>
-  img {
-    width: 100%;
-  }
-
   a {
     color: #00539f;
   }
@@ -31,15 +29,7 @@ const tags = frontmatter.tags;
     background-color: #f8fcfd;
   }
 </style>
-
-<BaseLayout pageTitle={frontmatter.title}>
-  <p>Written by {frontmatter.author}</p>
-  <p>
-    Published on: {frontmatter.pubDate.toString().slice(0, 10)}
-  </p>
-  <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
-  <slot />
-
+<BaseLayout>
   <div class="tags">
     {
       tags.map((tag: any) => (
