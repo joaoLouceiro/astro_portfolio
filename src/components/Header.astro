@@ -1,18 +1,18 @@
 ---
 import Navigation from "./Navigation.astro";
-import Menu from "./Menu.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <nav>
-  <div>
-    <Menu />
-    <ThemeIcon />
+  <div class="main-box">
+    <a href="/" class="nav-logo">João Louceiro</a>
+    <div class="nav-links">
+      <a href="/about/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="/tags/">Tags</a>
+      <ThemeIcon />
+    </div>
   </div>
-  <Navigation />
-  <script>
-    import "../scripts/menu.js";
-  </script>
 </nav>
 
 <style>
