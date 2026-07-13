@@ -8,8 +8,8 @@ function getFormattedDate(date: Date) {
   let year = date.getFullYear();
 
   // Add leading zeros
-  day = day < 10 ? "0" + day : day;
-  month = month < 10 ? "0" + month : month;
+  day = day < 10 ? 0 + day : day;
+  month = month < 10 ? 0 + month : month;
 
   return `${year}-${month}-${day}`;
 }
@@ -19,6 +19,16 @@ const formattedDate = getFormattedDate(pubDate);
 ---
 
 <article>
+  <div>
+    {
+      post.frontmatter.image ? (
+        <img
+          src={post.frontmatter.image.url}
+          alt={post.frontmatter.image.alt}
+        />
+      ) : null
+    }
+  </div>
   <span class="post-date">{formattedDate}</span>
   <h3>
     <a href={post.url}>{post.frontmatter.title}</a>
@@ -39,8 +49,27 @@ const formattedDate = getFormattedDate(pubDate);
   .post-date {
     font-family: var(--font-mono);
     color: var(--fg-dim);
+    font-size: 0.9rem;
   }
   h3 {
     margin: 0.25rem 0;
+  }
+  p {
+    margin: 0.5rem 0;
+  }
+  img {
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
+  div {
+    border-radius: 0.5rem;
+    border: 1px solid var(--bg2);
+    max-height: 15rem;
+    overflow: hidden;
   }
 </style>
