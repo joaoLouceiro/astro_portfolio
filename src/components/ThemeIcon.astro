@@ -1,11 +1,11 @@
 ---
-
+// TODO: :hover is not working in light mode
 ---
 
 <button id="themeToggle" aria-label="Toggle theme">
   <svg
     aria-hidden="true"
-    width="30px"
+    width="1rem"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
   >
@@ -23,22 +23,24 @@
 </button>
 
 <style>
-  #themeToggle {
+  button {
     border: 0;
     background: none;
-  }
-  .sun {
-    fill: black;
-  }
-  .moon {
-    fill: transparent;
+    cursor: pointer;
   }
 
+  :global(.dark) button:hover .moon {
+    fill: var(--accent);
+  }
+
+  .sun,
+  :global(.dark) .moon {
+    fill: var(--fg-dim);
+  }
+
+  .moon,
   :global(.dark) .sun {
     fill: transparent;
-  }
-  :global(.dark) .moon {
-    fill: white;
   }
 </style>
 

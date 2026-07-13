@@ -1,23 +1,68 @@
 ---
 import Navigation from "./Navigation.astro";
-import Menu from "./Menu.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <nav>
-  <div>
-    <Menu />
-    <ThemeIcon />
+  <div class="main-box">
+    <a href="/" class="nav-logo">João Louceiro</a>
+    <div class="nav-links">
+      <a href="/about/">About</a>
+      <a href="/blog/">Blog</a>
+      <a href="/tags/">Tags</a>
+      <ThemeIcon />
+    </div>
   </div>
-  <Navigation />
-  <script>
-    import "../scripts/menu.js";
-  </script>
 </nav>
 
 <style>
-  div {
+  nav {
+    width: 100%;
+    background: var(--bg0) 09;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-top: 4px solid var(--accent);
+    border-bottom: 1px solid var(--bg2);
+    padding: 0px;
+    backdrop-filter: blur(80px);
+  }
+  .main-box {
+    padding: 1rem;
+    align-items: center;
     display: flex;
     justify-content: space-between;
+  }
+
+  .nav-box {
+    display: flex;
+    justify-content: end;
+  }
+
+  .nav-logo {
+    text-decoration: none;
+    color: var(--fg);
+    font-family: var(--font-display);
+    font-weight: bold;
+  }
+
+  .nav-links {
+    width: auto;
+    text-align: center;
+  }
+
+  .nav-links a {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--fg-dim);
+    padding: 0px 10px;
+  }
+
+  a:hover,
+  .nav-links a:hover {
+    color: var(--accent);
   }
 </style>

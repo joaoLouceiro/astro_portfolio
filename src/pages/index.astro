@@ -1,10 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greeting";
-const pageTitle = "Home Page";
+import BlogPost from "../components/BlogPost.astro";
+
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true }),
+).sort((a: any, b: any) => {
+  return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
+});
+
+const pageTitle = "Welcome";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <h2>My awesome blog subtitle</h2>
-  <Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]} />
+  <p>
+    This is my personal page. This is where I ramble about stuff that intrigues
+    me.
+  </p>
+  {allPosts.map((post: any) => <BlogPost post={post} />)}
 </BaseLayout>
+
+<style>
+  p {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--bg5);
+  }
+</style>
