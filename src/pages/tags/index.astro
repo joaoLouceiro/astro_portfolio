@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TagContainer from "../../components/Tags.astro";
 
 const allPosts = Object.values(
   import.meta.glob("../posts/*.md", { eager: true }),
@@ -11,13 +12,5 @@ const tags = [
 ---
 
 <BaseLayout>
-  <div class="tags">
-    {
-      tags.map((tag: any) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
-    }
-  </div>
+  <TagContainer tags={tags} />
 </BaseLayout>
