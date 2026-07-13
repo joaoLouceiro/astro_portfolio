@@ -8,10 +8,21 @@ const allPosts = Object.values(
   return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
 });
 
-const pageTitle = "Home Page";
+const pageTitle = "Welcome";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <h2>My awesome blog subtitle</h2>
+  <p>
+    This is my personal page. This is where I ramble about stuff that intrigues
+    me.
+  </p>
   {allPosts.map((post: any) => <BlogPost post={post} />)}
 </BaseLayout>
+
+<style>
+  p {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--bg5);
+  }
+</style>

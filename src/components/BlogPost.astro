@@ -1,7 +1,46 @@
 ---
-const { url, title } = Astro.props;
+import TagContainer from "./Tags.astro";
+const { post } = Astro.props;
+
+function getFormattedDate(date: Date) {
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  // Add leading zeros
+  day = day < 10 ? "0" + day : day;
+  month = month < 10 ? "0" + month : month;
+
+  return `${year}-${month}-${day}`;
+}
+
+const pubDate = new Date(post.frontmatter.pubDate);
+const formattedDate = getFormattedDate(pubDate);
 ---
 
-<li>
-  <a href={url}>{title}</a>
-</li>
+<article>
+  <span class="post-date">{formattedDate}</span>
+  <h3>
+    <a href={post.url}>{post.frontmatter.title}</a>
+  </h3>
+  <p>
+    {post.frontmatter.description}
+  </p>
+  <TagContainer tags={post.frontmatter.tags} />
+</article>
+
+<style>
+  article {
+    margin: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--bg2);
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    color: var(--fg-dim);
+  }
+  h3 {
+    margin: 0.25rem 0;
+  }
+</style>
