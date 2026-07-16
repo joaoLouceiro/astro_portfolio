@@ -53,6 +53,19 @@
   }
 }
 
+.dark .astro-code {
+  border: 1px solid var(--bg2);
+}
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: #22282d !important;
+  /* Optional, if you also want font styles */
+  /* font-style: var(--shiki-dark-font-style) !important; */
+  /* font-weight: var(--shiki-dark-font-weight) !important; */
+  /* text-decoration: var(--shiki-dark-text-decoration) !important; */
+}
+
 * {
   box-sizing: border-box;
 }
