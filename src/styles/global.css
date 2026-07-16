@@ -108,9 +108,6 @@ a {
 a:hover,
 a:focus {
   color: var(--accent);
-}
-
-main a:hover {
   text-decoration: underline;
 }
 
