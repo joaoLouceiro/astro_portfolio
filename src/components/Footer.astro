@@ -13,9 +13,6 @@ import GitHubIcon from "../assets/github.svg";
     width: 100%;
     border-top: 1px solid var(--bg2);
   }
-  a {
-    color: var(--fg-dim);
-  }
   p {
     margin: 0.5rem;
     color: var(--fg-dim);
@@ -29,7 +26,15 @@ import GitHubIcon from "../assets/github.svg";
     transition: var(--transition);
   }
 
-  .social:hover a,
+  .social {
+    color: var(--fg-dim);
+    text-decoration: none;
+  }
+
+  .social:hover {
+    color: var(--accent);
+  }
+
   :global(.social:hover .symbol-fg),
   :global(.social:focus .symbol-fg) {
     fill: var(--accent);

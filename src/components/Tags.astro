@@ -5,7 +5,7 @@ const { tags } = Astro.props;
 <div class="tags">
   {
     tags.map((tag: any) => (
-      <a href={`/tags/${tag}`} class="tag">
+      <a href={`/tags/${tag}`} class="tag link-no-underline">
         {tag}
       </a>
     ))
@@ -26,6 +26,7 @@ const { tags } = Astro.props;
     padding: 0.2rem 0.5rem;
     border-radius: var(--radius-s);
     transition: var(--transition);
+    text-decoration: none;
   }
 
   .tags:first-child {
@@ -35,6 +36,5 @@ const { tags } = Astro.props;
   .tag:hover {
     background: var(--accent);
     color: var(--bg0);
-    text-decoration: none;
   }
 </style>
