@@ -57,14 +57,22 @@ const newerPost = allPosts[currentPostIndex - 1];
     background-color: var(--bg1);
     transition: var(--transition);
   }
+  .pagination-link > h4 {
+    transition: var(--transition);
+  }
   .pagination-link:hover {
     background-color: var(--bg2);
+    text-decoration: none;
+  }
+  .pagination-link:hover > h4 {
+    color: var(--accent);
   }
   :global(.pagination-link:hover .symbol-fg) {
     fill: var(--accent);
   }
   .pagination-link > h4 {
     margin: 0.25rem;
+    color: var(--fg-dim);
   }
   .pagination-link-right {
     text-align: end;
