@@ -88,19 +88,21 @@ h1 {
 
 a {
   text-decoration: none;
-  color: var(--fg);
+  color: var(--accent);
   transition: var(--transition);
 }
 
 a:hover,
-a:focus,
-nav a:hover,
-nav a:focus {
+a:focus {
   color: var(--accent);
 }
 
+main a:hover {
+  text-decoration: underline;
+}
+
 svg {
-  fill: var(--fg);
+  fill: var(--fg-dim);
 }
 
 .post-date {

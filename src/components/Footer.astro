@@ -8,20 +8,24 @@ import GitHubIcon from "../assets/github.svg";
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 2rem;
+    margin: 1rem;
     padding: 1rem;
     width: 100%;
     border-top: 1px solid var(--bg2);
   }
+  a {
+    color: var(--fg-dim);
+  }
   p {
     margin: 0.5rem;
+    color: var(--fg-dim);
   }
   :global(.symbol-bg) {
     stroke: none;
     fill: var(--bg0);
   }
   :global(.symbol-fg) {
-    fill: var(--fg);
+    fill: var(--fg-dim);
     transition: var(--transition);
   }
 
