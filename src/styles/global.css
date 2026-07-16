@@ -1,47 +1,69 @@
 :root {
-    --bg0: #f8f0dc; /* Main background */
-    --bg1: #f0e9cc; /* Secondary background, floating panels */
-    --bg2: #e8dfc0; /* Selection background */
-    --bg3: #ddd5b5; /* Line number background */
-    --bg4: #d5ccac; /* Cursor line */
-    --bg5: #c5bc9a; /* Non-text, line dividers */
+  --bg0: #f8f0dc; /* Main background */
+  --bg1: #f0e9cc; /* Secondary background, floating panels */
+  --bg2: #e8dfc0; /* Selection background */
+  --bg3: #ddd5b5; /* Line number background */
+  --bg4: #d5ccac; /* Cursor line */
+  --bg5: #c5bc9a; /* Non-text, line dividers */
 
-    --fg: #5c6a72; /* Primary text */
-    --fg-dim: #829181; /* Comments, subtle text */
+  --fg: #5c6a72; /* Primary text */
+  --fg-dim: #829181; /* Comments, subtle text */
 
-    --red: #f85552; /* Keywords, errors */
-    --orange: #f57d26; /* Operators, attributes */
-    --yellow: #dfa000; /* Types, warnings */
-    --green: #8da101; /* Strings, diff added */
-    --teal: #35a77c; /* Functions, hints */
-    --blue: #3a94c5; /* Properties, info */
-    --purple: #df69ba; /* Numbers, constants */
+  --red: #f85552; /* Keywords, errors */
+  --orange: #f57d26; /* Operators, attributes */
+  --yellow: #dfa000; /* Types, warnings */
+  --green: #8da101; /* Strings, diff added */
+  --teal: #35a77c; /* Functions, hints */
+  --blue: #3a94c5; /* Properties, info */
+  --purple: #df69ba; /* Numbers, constants */
 
-    --accent: var(--green);
+  --accent: var(--yellow);
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'Lora', Georgia, serif;
-  --font-mono: 'DM Mono', 'Courier New', monospace;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
+  --font-mono: "DM Mono", "Courier New", monospace;
+
+  --radius: 0.5rem;
+  --radius-s: 0.25rem;
+
+  --transition: all 0.3s ease;
 }
 
-html.dark {
-  --bg0: #272e33;
-  --bg1: #2e383c;
-  --bg2: #374145;
-  --bg3: #414b50;
-  --bg4: #495156;
-  --bg5: #4f5b58;
+@media (prefers-color-scheme: dark) {
+  html.dark {
+    --bg0: #272e33;
+    --bg1: #2e383c;
+    --bg2: #374145;
+    --bg3: #414b50;
+    --bg4: #495156;
+    --bg5: #4f5b58;
 
-  --fg: #d3c6aa;
-  --fg-dim: #859289;
+    --fg: #d3c6aa;
+    --fg-dim: #859289;
 
-  --red: #e67e80;
-  --orange: #e69875;
-  --yellow: #dbbc7f;
-  --green: #a7c080;
-  --teal: #83c092;
-  --blue: #7fbbb3;
-  --purple: #d699b6;
+    --red: #e67e80;
+    --orange: #e69875;
+    --yellow: #dbbc7f;
+    --green: #a7c080;
+    --teal: #83c092;
+    --blue: #7fbbb3;
+    --purple: #d699b6;
+
+    --accent: var(--yellow);
+  }
+}
+
+.dark .astro-code {
+  border: 1px solid var(--bg2);
+}
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: #22282d !important;
+  /* Optional, if you also want font styles */
+  /* font-style: var(--shiki-dark-font-style) !important; */
+  /* font-weight: var(--shiki-dark-font-weight) !important; */
+  /* text-decoration: var(--shiki-dark-text-decoration) !important; */
 }
 
 * {
@@ -56,12 +78,12 @@ html {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: var(--font-body);
-    height: 100%;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-body);
+  height: 100%;
+  margin: 0;
 }
 
 main {
@@ -69,6 +91,7 @@ main {
   max-width: 80ch;
   margin: 0 auto;
   flex-grow: 1;
+  padding: 0 1.5rem;
 }
 
 h1 {
@@ -77,15 +100,50 @@ h1 {
 }
 
 a {
-    text-decoration: none;
-    color: var(--fg)
+  text-decoration: none;
+  color: var(--accent);
+  transition: var(--transition);
 }
 
 a:hover,
-a:focus,
-nav a:hover,
-nav a:focus {
-    transition: all 0.2s ease;
+a:focus {
   color: var(--accent);
 }
 
+main a:hover {
+  text-decoration: underline;
+}
+
+svg {
+  fill: var(--fg-dim);
+}
+
+.post-date {
+  font-family: var(--font-mono);
+  color: var(--fg-dim);
+  font-size: 0.9rem;
+}
+
+.banner-img {
+  width: 100%;
+  transition: var(--transition);
+  max-height: 15rem;
+  display: block;
+  position: relative;
+  object-fit: cover;
+}
+
+.banner-img:hover {
+  transform: scale(1.05);
+}
+
+.banner-wrapper {
+  max-height: 10rem;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--bg2);
+}
+
+.accent {
+  color: var(--accent);
+}

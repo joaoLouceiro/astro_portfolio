@@ -1,52 +1,119 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-
+import Tags from "../components/Tags.astro";
 import "../styles/global.css";
+import ArrowLeft from "../assets/arrow-left.svg";
+import ArrowRight from "../assets/arrow-right.svg";
 
-const { frontmatter } = Astro.props;
+const { frontmatter, url } = Astro.props;
 
 const tags = frontmatter.tags;
+
+const allPosts = Object.values(
+  import.meta.glob("../pages/posts/*.md", { eager: true }),
+).sort((a: any, b: any) => {
+  return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
+});
+
+const currentPostIndex = allPosts.findIndex((post: any) => post.url === url);
+
+const olderPost = allPosts[currentPostIndex + 1];
+const newerPost = allPosts[currentPostIndex - 1];
 ---
 
 <style>
   img {
     width: 100%;
   }
-
-  a {
-    color: #00539f;
+  p {
+    margin: 0.25rem 0;
   }
-
-  .tags {
+  .post-header {
+    border-bottom: 1px solid var(--bg4);
+    margin: 0.5rem 0;
+    padding-bottom: 0.5rem;
+  }
+  :global(.astro-code) {
+    color: var(--fg);
+    border-radius: var(--radius);
+    border: 1px solid var(--bg1);
+    padding: 1rem 1.5rem !important;
+  }
+  .pagination-container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
+  @media only screen and (max-width: 600px) {
+    .pagination-container {
+      flex-direction: column;
+    }
+  }
+  .pagination-link {
+    padding: 1rem;
+    flex: 1;
+    border: 1px solid var(--bg3);
+    border-radius: var(--radius);
+    background-color: var(--bg1);
+    transition: var(--transition);
+  }
+  .pagination-link > h4 {
+    transition: var(--transition);
+  }
+  .pagination-link:hover {
+    background-color: var(--bg2);
+    text-decoration: none;
+  }
+  .pagination-link:hover > h4 {
+    color: var(--accent);
+  }
+  :global(.pagination-link:hover .symbol-fg) {
+    fill: var(--accent);
+  }
+  .pagination-link > h4 {
+    margin: 0.25rem;
+    color: var(--fg-dim);
+  }
+  .pagination-link-right {
+    text-align: end;
   }
 </style>
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>Written by {frontmatter.author}</p>
-  <p>
-    Published on: {frontmatter.pubDate.toString().slice(0, 10)}
-  </p>
-  <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+  <div class="post-header">
+    <span class="post-date">
+      {frontmatter.pubDate.toString().slice(0, 10)}
+    </span>
+    <p>
+      {frontmatter.description}
+    </p>
+    <Tags tags={tags} />
+  </div>
   <slot />
-
-  <div class="tags">
+  <div class="pagination-container">
     {
-      tags.map((tag: any) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
+      newerPost ? (
+        <a href={newerPost.url} class="pagination-link">
+          <h4>
+            <ArrowLeft /> {newerPost.frontmatter.title}
+          </h4>
+          <span class="post-date" style="margin-left: 1.5rem;">
+            Newer Post
+          </span>
+        </a>
+      ) : null
+    }
+    {
+      olderPost ? (
+        <a href={olderPost.url} class="pagination-link pagination-link-right">
+          <h4>
+            {olderPost.frontmatter.title} <ArrowRight />
+          </h4>
+          <span class="post-date" style="margin-right: 1.5rem;">
+            Older Post
+          </span>
+        </a>
+      ) : null
     }
   </div>
 </BaseLayout>

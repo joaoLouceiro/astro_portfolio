@@ -5,7 +5,9 @@ import BlogPost from "../../components/BlogPost.astro";
 export async function getStaticPaths() {
   const allPosts = Object.values(
     import.meta.glob("../posts/*.md", { eager: true }),
-  );
+  ).sort((a: any, b: any) => {
+    return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
+  });
 
   const uniqueTags = [
     ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
@@ -27,6 +29,6 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
+  <p>Posts tagged with <b class="accent">{tag}</b></p>
   {posts.map((post: any) => <BlogPost post={post} />)}
 </BaseLayout>

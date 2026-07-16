@@ -4,10 +4,19 @@ title: My Fourth Blog Post
 author: Astro Learner
 description: "This post will show up on its own!"
 image:
-  url: "https://docs.astro.build/default-og-image.png"
+  url: "/src/assets/screenshot.png"
   alt: "The word astro against an illustration of planets and stars."
 pubDate: 2022-08-08
 tags: ["astro", "successes"]
 ---
 
-This post should show up with my other blog posts, because `import.meta.glob()` is returning a list of all my posts in order to create my list.
+Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+
+```python
+def _extract_question(messages):
+    for msg in reversed(messages):
+        if msg.role == "user":
+            return msg.content.strip()
+```
+
+Lorem [ipsum dolor sit amet](www.google.com) consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.

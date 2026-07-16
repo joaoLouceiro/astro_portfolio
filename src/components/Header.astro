@@ -4,11 +4,13 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 <nav>
   <div class="main-box">
-    <a href="/" class="nav-logo">João Louceiro</a>
+    <a href="/" class="nav-logo"
+      >João <b style="color: var(--accent);">Louceiro</b></a
+    >
     <div class="nav-links">
       <a href="/about/">About</a>
-      <a href="/blog/">Blog</a>
-      <a href="/tags/">Tags</a>
+      <!-- <a href="/blog/">Blog</a> -->
+      <!-- <a href="/tags/">Tags</a> -->
       <ThemeIcon />
     </div>
   </div>
@@ -17,25 +19,23 @@ import ThemeIcon from "./ThemeIcon.astro";
 <style>
   nav {
     width: 100%;
-    background: var(--bg0);
+    /* background: var(--bg0); */
+
     position: sticky;
     top: 0;
     z-index: 100;
     border-top: 4px solid var(--accent);
     border-bottom: 1px solid var(--bg2);
     padding: 0px;
-    backdrop-filter: blur(80px);
+    backdrop-filter: blur(16px);
   }
   .main-box {
+    max-width: 90ch;
+    width: 100%;
     padding: 1rem;
-    align-items: center;
+    margin: auto;
     display: flex;
     justify-content: space-between;
-  }
-
-  .nav-box {
-    display: flex;
-    justify-content: end;
   }
 
   .nav-logo {
@@ -43,6 +43,7 @@ import ThemeIcon from "./ThemeIcon.astro";
     color: var(--fg);
     font-family: var(--font-display);
     font-weight: bold;
+    font-size: 1.3rem;
   }
 
   .nav-links {

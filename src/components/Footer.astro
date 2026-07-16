@@ -1,5 +1,6 @@
 ---
-
+import RssIcon from "../assets/rss.svg";
+import GitHubIcon from "../assets/github.svg";
 ---
 
 <style>
@@ -7,19 +8,40 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 2rem;
+    margin: 1rem;
     padding: 1rem;
     width: 100%;
     border-top: 1px solid var(--bg2);
   }
+  a {
+    color: var(--fg-dim);
+  }
   p {
     margin: 0.5rem;
+    color: var(--fg-dim);
+  }
+  :global(.symbol-bg) {
+    stroke: none;
+    fill: var(--bg0);
+  }
+  :global(.symbol-fg) {
+    fill: var(--fg-dim);
+    transition: var(--transition);
+  }
+
+  .social:hover a,
+  :global(.social:hover .symbol-fg),
+  :global(.social:focus .symbol-fg) {
+    fill: var(--accent);
   }
 </style>
 
 <footer>
   <p>
-    <a href="/rss.xml">RSS</a>
+    <a href="http://github.com/joaolouceiro" class="social">
+      GitHub <GitHubIcon /></a
+    > |
+    <a href="/rss.xml" class="social"> RSS <RssIcon /></a>
   </p>
   <p>©2026 João Louceiro</p>
 </footer>
