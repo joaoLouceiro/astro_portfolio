@@ -37,7 +37,8 @@
     cursor: pointer;
   }
 
-  :global(.dark) button:hover .moon {
+  :global(html:not(.dark)) button:hover .sun,
+  :global(html.dark) button:hover .moon {
     fill: var(--accent);
   }
 
