@@ -4,7 +4,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 <nav>
   <div class="main-box">
-    <a href="/" class="nav-logo">João Louceiro</a>
+    <a href="/" class="nav-logo">João <b>Louceiro</b></a>
     <div class="nav-links">
       <a href="/about/">About</a>
       <a href="/blog/">Blog</a>
@@ -27,15 +27,12 @@ import ThemeIcon from "./ThemeIcon.astro";
     backdrop-filter: blur(80px);
   }
   .main-box {
+    max-width: 90ch;
+    width: 100%;
     padding: 1rem;
-    align-items: center;
+    margin: auto;
     display: flex;
     justify-content: space-between;
-  }
-
-  .nav-box {
-    display: flex;
-    justify-content: end;
   }
 
   .nav-logo {
