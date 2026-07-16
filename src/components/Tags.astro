@@ -19,13 +19,17 @@ const { tags } = Astro.props;
   }
 
   .tag {
-    margin: 0.25em;
+    margin: 0.25rem 0.5rem 0.25rem 0;
     background: transparent;
     border: 1px solid var(--accent);
     color: var(--accent);
     padding: 0.2rem 0.5rem;
-    border-radius: 5px;
-    transition: all 0.2s ease;
+    border-radius: var(--radius-s);
+    transition: var(--transition);
+  }
+
+  .tags:first-child {
+    margin-left: 0;
   }
 
   .tag:hover {
