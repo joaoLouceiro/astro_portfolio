@@ -48,6 +48,8 @@
     --teal: #83c092;
     --blue: #7fbbb3;
     --purple: #d699b6;
+
+    --accent: var(--yellow);
   }
 }
 
@@ -87,18 +89,14 @@ h1 {
 a {
   text-decoration: none;
   color: var(--fg);
+  transition: var(--transition);
 }
 
 a:hover,
 a:focus,
 nav a:hover,
 nav a:focus {
-  transition: var(--transition);
   color: var(--accent);
-}
-
-img {
-  border-radius: var(--radius);
 }
 
 svg {
@@ -129,4 +127,8 @@ svg {
   overflow: hidden;
   border-radius: var(--radius);
   border: 1px solid var(--bg2);
+}
+
+.accent {
+  color: var(--accent);
 }

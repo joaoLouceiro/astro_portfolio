@@ -18,7 +18,13 @@ const { pageTitle } = Astro.props;
   <body>
     <Header />
     <main>
-      <h1>{pageTitle}</h1>
+      <h1>
+        {pageTitle.substring(0, 2 * (pageTitle.length / 3))}<span class="accent"
+          >{
+            pageTitle.substring(2 * (pageTitle.length / 3), pageTitle.length)
+          }</span
+        >
+      </h1>
       <slot />
     </main>
     <Footer />

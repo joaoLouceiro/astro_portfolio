@@ -22,10 +22,12 @@ import GitHubIcon from "../assets/github.svg";
   }
   :global(.symbol-fg) {
     fill: var(--fg);
+    transition: var(--transition);
   }
 
   .social:hover a,
-  :global(.social:hover .symbol-fg) {
+  :global(.social:hover .symbol-fg),
+  :global(.social:focus .symbol-fg) {
     fill: var(--accent);
   }
 </style>

@@ -25,10 +25,13 @@ const newerPost = allPosts[currentPostIndex - 1];
   img {
     width: 100%;
   }
+  p {
+    margin: 0.25rem 0;
+  }
   .post-header {
     border-bottom: 1px solid var(--bg4);
     margin: 0.5rem 0;
-    padding: 1.5rem 0;
+    padding-bottom: 0.5rem;
   }
   :global(.astro-code) {
     color: var(--fg);
@@ -73,6 +76,9 @@ const newerPost = allPosts[currentPostIndex - 1];
     <span class="post-date">
       {frontmatter.pubDate.toString().slice(0, 10)}
     </span>
+    <p>
+      {frontmatter.description}
+    </p>
     <Tags tags={tags} />
   </div>
   <slot />

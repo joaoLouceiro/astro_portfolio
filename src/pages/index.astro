@@ -12,17 +12,15 @@ const pageTitle = "Welcome";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h2>My awesome blog subtitle</h2>
-  <p>
-    This is my personal page. This is where I ramble about stuff that intrigues
-    me.
+  <p style="border-bottom: 1px solid var(--bg2)">
+    This is my personal page. This is where I ramble, mumble, and, sometimes,
+    stumble.
   </p>
   {allPosts.map((post: any) => <BlogPost post={post} />)}
 </BaseLayout>
 
 <style>
   p {
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--bg5);
+    padding-bottom: 1rem;
   }
 </style>
