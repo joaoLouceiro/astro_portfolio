@@ -1,5 +1,6 @@
 ---
-
+import RssIcon from "../assets/rss.svg";
+import GitHubIcon from "../assets/github.svg";
 ---
 
 <style>
@@ -15,11 +16,26 @@
   p {
     margin: 0.5rem;
   }
+  :global(.symbol-bg) {
+    stroke: none;
+    fill: var(--bg0);
+  }
+  :global(.symbol-fg) {
+    fill: var(--fg);
+  }
+
+  .social:hover a,
+  :global(.social:hover .symbol-fg) {
+    fill: var(--accent);
+  }
 </style>
 
 <footer>
   <p>
-    <a href="/rss.xml">RSS</a>
+    <a href="http://github.com/joaolouceiro" class="social">
+      GitHub <GitHubIcon /></a
+    > |
+    <a href="/rss.xml" class="social"> RSS <RssIcon /></a>
   </p>
   <p>©2026 João Louceiro</p>
 </footer>
