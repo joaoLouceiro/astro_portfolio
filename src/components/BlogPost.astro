@@ -31,11 +31,13 @@ const formattedDate = getFormattedDate(pubDate);
     ) : null
   }
   <span class="post-date">{formattedDate}</span>
-  <a class="post-title" href={post.url}>
-    <h3>
-      {post.frontmatter.title}
+  <p>
+    <h3 class="post-title">
+      <a href={post.url}>
+        {post.frontmatter.title}
+      </a>
     </h3>
-  </a>
+  </p>
   <p>
     {post.frontmatter.description}
   </p>
@@ -54,15 +56,23 @@ const formattedDate = getFormattedDate(pubDate);
       margin: 1.5rem 0;
     }
   }
+
   h3 {
     margin: 0.25rem 0;
+  }
+
+  .post-title {
+    display: inline;
+  }
+  .post-title > a {
     color: var(--fg);
   }
-  .post-title:hover {
+  .post-title:hover > a {
     text-decoration: none;
-  }
-  .post-title:hover > h3 {
     color: var(--accent);
+  }
+  .post-date {
+    font-size: 0.8rem;
   }
 
   p {
