@@ -1,8 +1,10 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import remarkBlocks from "remark-callout-plus/astro";
 
 export default defineConfig({
   site: "https://jlouceiro.netlify.app/",
+  integrations: [remarkBlocks()],
   markdown: {
     shikiConfig: {
       themes: {

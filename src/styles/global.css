@@ -1,3 +1,5 @@
+@import "remark-callout-plus/styles/callout.css";
+
 :root {
   --bg0: #f8f0dc; /* Main background */
   --bg1: #f0e9cc; /* Secondary background, floating panels */
@@ -29,6 +31,18 @@
   --radius-s: 0.25rem;
 
   --transition: all 0.3s ease;
+
+  --block-radius: var(--radius-s);
+  --block-padding: 0.5rem 0.5rem 0.5rem 2rem;
+  --block-margin: 1rem 0;
+
+  --callout-radius: var(--radius-s);
+  --callout-padding: var(--block-padding);
+  --callout-margin: var(--block-margin);
+  --callout-border-width: 3px;
+  --callout-title-font-size: 1rem;
+  --callout-body-font-size: 1rem;
+  --callout-icon-size: 1.15rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,6 +80,10 @@ html {
   color: var(--fg);
   font-family: var(--font-display);
   height: 100%;
+}
+
+.slow-transition {
+  transition: all 1s ease;
 }
 
 body {
@@ -106,6 +124,10 @@ svg {
   fill: var(--fg-dim);
 }
 
+em {
+  color: var(--accent);
+}
+
 .post-date {
   font-family: var(--font-mono);
   color: var(--fg-dim);
@@ -142,7 +164,7 @@ code {
   border-radius: var(--radius-s);
   border: 1px solid var(--bg3);
   color: var(--fg-dim);
-  padding: 0.25rem;
+  padding: 0.02rem 0.25rem;
 }
 
 .dark .astro-code {
@@ -167,8 +189,86 @@ blockquote {
   background-color: var(--bg1);
   border-left: 3px solid var(--accent);
   border-radius: var(--radius-s);
-  color: var(--fg-dim);
   font-style: italic;
+  color: var(--fg-dim);
   margin: 1rem 0;
   padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+
+.callout {
+  background-color: var(--bg1);
+}
+
+.callout-header {
+  padding-top: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+.callout-body {
+  line-height: 1.4;
+  padding-bottom: 1rem;
+}
+
+.callout-icon > svg {
+  fill: none;
+}
+
+.callout-note {
+  background: rgb(from var(--blue) r g b / 14%);
+  --callout-border: var(--blue);
+  color: var(--fg-dim);
+}
+.callout-note > .callout-header > .callout-title {
+  color: var(blue);
+}
+.callout-note .callout-icon > svg {
+  stroke: var(--blue);
+}
+
+.callout-warning {
+  background: rgb(from var(--orange) r g b / 14%);
+  --callout-border: var(--orange);
+  color: var(--fg-dim);
+}
+.callout-warning > .callout-header > .callout-title {
+  color: var(--orange);
+}
+.callout-warning .callout-icon > svg {
+  stroke: var(--orange);
+}
+
+.callout-summary {
+  background: rgb(from var(--purple) r g b / 14%);
+  --callout-border: var(--purple);
+  color: var(--fg-dim);
+}
+.callout-summary > .callout-header > .callout-title {
+  color: var(--purple);
+}
+.callout-summary .callout-icon > svg {
+  stroke: var(--purple);
+}
+
+.callout-tip {
+  background: rgb(from var(--green) r g b / 14%);
+  --callout-border: var(--green);
+  color: var(--fg-dim);
+}
+.callout-tip > .callout-header > .callout-title {
+  color: var(--green);
+}
+.callout-tip .callout-icon > svg {
+  stroke: var(--green);
+}
+
+.callout-danger {
+  background: rgb(from var(--red) r g b / 14%);
+  --callout-border: var(--red);
+  color: var(--fg-dim);
+}
+.callout-danger > .callout-header > .callout-title {
+  color: var(--red);
+}
+.callout-danger .callout-icon > svg {
+  stroke: var(--red);
 }
