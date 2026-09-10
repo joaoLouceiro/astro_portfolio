@@ -1,26 +1,24 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogPost from "../components/BlogPost.astro";
-
-const allPosts = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
-).sort((a: any, b: any) => {
-  return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
-});
-
-const pageTitle = "Welcome";
+// Root page: client-side browser-language redirect (static + noscript fallback).
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <p style="border-bottom: 1px solid var(--bg2)">
-    This is my personal page. This is where I ramble, mumble, and, sometimes,
-    stumble.
-  </p>
-  {allPosts.map((post: any) => <BlogPost post={post} />)}
-</BaseLayout>
-
-<style>
-  p {
-    padding-bottom: 1rem;
-  }
-</style>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>jlouceiro</title>
+  </head>
+  <body>
+    <script is:inline>
+      const supported = ["pt", "en"];
+      const langs = (navigator.languages ?? [navigator.language]).map((l) =>
+        l.toLowerCase().split("-")[0],
+      );
+      const pick = langs.find((l) => supported.includes(l)) ?? "pt";
+      window.location.replace("/" + pick + "/");
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/pt/" />
+    </noscript>
+  </body>
+</html>

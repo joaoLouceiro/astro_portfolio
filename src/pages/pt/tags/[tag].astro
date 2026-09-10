@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogPost from "../../../components/BlogPost.astro";
+import { getCollection } from "astro:content";
+import { defaultLang, type Lang } from "../../../i18n/ui";
+import { useTranslations } from "../../../i18n/utils";
+
+const lang: Lang = "pt";
+
+export async function getStaticPaths() {
+  const allPosts = (await getCollection("blog")).filter((post) =>
+    post.id.startsWith("pt/"),
+  );
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag),
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const t = useTranslations(lang);
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+  <p>{t("tags.tagged")} <b class="accent">{tag}</b></p>
+  {posts.map((post) => <BlogPost post={post} />)}
+</BaseLayout>

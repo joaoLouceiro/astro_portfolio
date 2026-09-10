@@ -3,10 +3,17 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
-const { pageTitle } = Astro.props;
+interface Props {
+  pageTitle: string;
+  langSwitchHref?: string;
+  langSwitchVisible?: boolean;
+}
+
+const { pageTitle, langSwitchHref, langSwitchVisible = true } = Astro.props;
+const lang = Astro.currentLocale ?? "pt";
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -16,7 +23,7 @@ const { pageTitle } = Astro.props;
   </head>
 
   <body>
-    <Header />
+    <Header langSwitchHref={langSwitchHref} langSwitchVisible={langSwitchVisible} />
     <main>
       <h1>
         {pageTitle.substring(0, 2 * (pageTitle.length / 3))}<span class="accent"

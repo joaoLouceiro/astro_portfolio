@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import { getCollection } from "astro:content";
+import { defaultLang, type Lang } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
+
+const lang = (Astro.currentLocale ?? defaultLang) as Lang;
+const t = useTranslations(lang);
+
+const posts = (await getCollection("blog"))
+  .filter((post) => post.id.startsWith(`${lang}/`))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout pageTitle={t("blog.title")}>
+  <p>{t("blog.intro")}</p>
+  <ul>
+    {posts.map((post) => <BlogPost post={post} />)}
+  </ul>
+</BaseLayout>
