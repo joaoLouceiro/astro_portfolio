@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import TagContainer from "../../../components/Tags.astro";
+import { getCollection } from "astro:content";
+import { defaultLang, type Lang } from "../../../i18n/ui";
+import { useTranslations } from "../../../i18n/utils";
+
+const lang: Lang = "en";
+
+const allPosts = (await getCollection("blog")).filter((post) =>
+  post.id.startsWith("en/"),
+);
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+const t = useTranslations(lang);
+---
+
+<BaseLayout pageTitle={t("tags.title")}>
+  <p>{t("tags.intro")}</p>
+  <TagContainer tags={tags} />
+</BaseLayout>

@@ -1,5 +1,12 @@
 ---
 import TagContainer from "./Tags.astro";
+import type { CollectionEntry } from "astro:content";
+import { getPostHref } from "../i18n/utils";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
 const { post } = Astro.props;
 
 function getFormattedDate(date: Date) {
@@ -7,25 +14,23 @@ function getFormattedDate(date: Date) {
   let month: string | number = date.getMonth() + 1;
   let year: number = date.getFullYear();
 
-  // Add leading zeros
   day = day < 10 ? "0" + day : day.toString();
   month = month < 10 ? "0" + month : month.toString();
 
   return `${year}-${month}-${day}`;
 }
 
-const pubDate = new Date(post.frontmatter.pubDate);
-const formattedDate = getFormattedDate(pubDate);
+const formattedDate = getFormattedDate(post.data.pubDate);
 ---
 
 <article>
   {
-    post.frontmatter.image ? (
+    post.data.image ? (
       <div class="banner-wrapper">
         <img
           class="banner-img"
-          src={post.frontmatter.image.url}
-          alt={post.frontmatter.image.alt}
+          src={post.data.image.url}
+          alt={post.data.image.alt}
         />
       </div>
     ) : null
@@ -33,15 +38,15 @@ const formattedDate = getFormattedDate(pubDate);
   <span class="post-date">{formattedDate}</span>
   <p>
     <h3 class="post-title">
-      <a href={post.url}>
-        {post.frontmatter.title}
+      <a href={getPostHref(post.id)}>
+        {post.data.title}
       </a>
     </h3>
   </p>
   <p>
-    {post.frontmatter.description}
+    {post.data.description}
   </p>
-  <TagContainer tags={post.frontmatter.tags} />
+  <TagContainer tags={post.data.tags} />
 </article>
 
 <style is:global>

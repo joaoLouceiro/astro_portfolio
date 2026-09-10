@@ -1,6 +1,11 @@
 ---
 import RssIcon from "../assets/rss.svg";
 import GitHubIcon from "../assets/github.svg";
+import { defaultLang, type Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+
+const lang = (Astro.currentLocale ?? defaultLang) as Lang;
+const t = useTranslations(lang);
 ---
 
 <style>
@@ -46,7 +51,9 @@ import GitHubIcon from "../assets/github.svg";
     <a href="http://github.com/joaolouceiro" class="social">
       GitHub <GitHubIcon /></a
     > |
-    <a href="/rss.xml" class="social"> RSS <RssIcon /></a>
+    <a href="/rss.xml" class="social">
+      RSS <RssIcon /></a
+    >
   </p>
-  <p>©2026 João Louceiro</p>
+  <p>{t("footer.rights")}</p>
 </footer>

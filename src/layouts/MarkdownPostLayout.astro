@@ -4,21 +4,33 @@ import Tags from "../components/Tags.astro";
 import "../styles/global.css";
 import ArrowLeft from "../assets/arrow-left.svg";
 import ArrowRight from "../assets/arrow-right.svg";
+import { defaultLang, type Lang } from "../i18n/ui";
+import { useTranslations, getPostHref } from "../i18n/utils";
+import { getCollection, getEntry, type CollectionEntry } from "astro:content";
 
-const { frontmatter, url } = Astro.props;
+interface Props {
+  post: CollectionEntry<"blog">;
+}
 
-const tags = frontmatter.tags;
+const { post } = Astro.props;
+const lang = (Astro.currentLocale ?? defaultLang) as Lang;
+const t = useTranslations(lang);
+const tags = post.data.tags;
 
-const allPosts = Object.values(
-  import.meta.glob("../pages/posts/*.md", { eager: true }),
-).sort((a: any, b: any) => {
-  return new Date(b.frontmatter.pubDate) - new Date(a.frontmatter.pubDate);
-});
+const allPosts = (await getCollection("blog"))
+  .filter((p) => p.id.startsWith(`${lang}/`))
+  .sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
 
-const currentPostIndex = allPosts.findIndex((post: any) => post.url === url);
-
+const currentPostIndex = allPosts.findIndex((p) => p.id === post.id);
 const olderPost = allPosts[currentPostIndex + 1];
 const newerPost = allPosts[currentPostIndex - 1];
+
+const sibling = post.data.translations
+  ? await getEntry("blog", post.data.translations)
+  : undefined;
+const langSwitchHref = sibling ? getPostHref(sibling.id) : undefined;
 ---
 
 <style>
@@ -79,13 +91,28 @@ const newerPost = allPosts[currentPostIndex - 1];
   }
 </style>
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout
+  pageTitle={post.data.title}
+  langSwitchHref={langSwitchHref}
+  langSwitchVisible={!!langSwitchHref}
+>
   <div class="post-header">
+    {
+      post.data.image ? (
+        <div class="banner-wrapper">
+          <img
+            class="banner-img"
+            src={post.data.image.url}
+            alt={post.data.image.alt}
+          />
+        </div>
+      ) : null
+    }
     <span class="post-date">
-      {frontmatter.pubDate.toString().slice(0, 10)}
+      {post.data.pubDate.toString().slice(0, 10)}
     </span>
     <p>
-      {frontmatter.description}
+      {post.data.description}
     </p>
     <Tags tags={tags} />
   </div>
@@ -93,24 +120,24 @@ const newerPost = allPosts[currentPostIndex - 1];
   <div class="pagination-container">
     {
       newerPost ? (
-        <a href={newerPost.url} class="pagination-link">
+        <a href={getPostHref(newerPost.id)} class="pagination-link">
           <h4>
-            <ArrowLeft /> {newerPost.frontmatter.title}
+            <ArrowLeft /> {newerPost.data.title}
           </h4>
           <span class="post-date" style="margin-left: 1.5rem;">
-            Newer Post
+            {t("post.newer")}
           </span>
         </a>
       ) : null
     }
     {
       olderPost ? (
-        <a href={olderPost.url} class="pagination-link pagination-link-right">
+        <a href={getPostHref(olderPost.id)} class="pagination-link pagination-link-right">
           <h4>
-            {olderPost.frontmatter.title} <ArrowRight />
+            {olderPost.data.title} <ArrowRight />
           </h4>
           <span class="post-date" style="margin-right: 1.5rem;">
-            Older Post
+            {t("post.older")}
           </span>
         </a>
       ) : null

@@ -173,7 +173,7 @@ code {
 .dark .astro-code,
 .dark .astro-code span {
   color: var(--shiki-dark) !important;
-  background-color: !important;
+  background-color: var(--bg-code) !important;
   /* Optional, if you also want font styles */
   /* font-style: var(--shiki-dark-font-style) !important; */
   /* font-weight: var(--shiki-dark-font-weight) !important; */
@@ -219,7 +219,7 @@ blockquote {
   color: var(--fg-dim);
 }
 .callout-note > .callout-header > .callout-title {
-  color: var(blue);
+  color: var(--blue);
 }
 .callout-note .callout-icon > svg {
   stroke: var(--blue);

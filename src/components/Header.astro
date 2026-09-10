@@ -1,16 +1,29 @@
 ---
 import ThemeIcon from "./ThemeIcon.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import { defaultLang, type Lang } from "../i18n/ui";
+import { useTranslations, getRelativeLocaleUrl } from "../i18n/utils";
+
+interface Props {
+  langSwitchHref?: string;
+  langSwitchVisible?: boolean;
+}
+
+const { langSwitchHref, langSwitchVisible = true } = Astro.props;
+const lang = (Astro.currentLocale ?? defaultLang) as Lang;
+const t = useTranslations(lang);
 ---
 
 <nav>
   <div class="main-box">
-    <a href="/" class="nav-logo"
+    <a href={getRelativeLocaleUrl(lang)} class="nav-logo"
       >João <b style="color: var(--accent);">Louceiro</b></a
     >
     <div class="nav-links">
-      <a href="/about/">About</a>
-      <!-- <a href="/blog/">Blog</a> -->
-      <!-- <a href="/tags/">Tags</a> -->
+      <a href=`${getRelativeLocaleUrl(lang, "/about")}`>{t("nav.about")}</a>
+      <!-- <a href=`${getRelativeLocaleUrl(lang, "/blog")}`>{t("nav.blog")}</a> -->
+      <!-- <a href=`${getRelativeLocaleUrl(lang, "/tags")}`>{t("nav.tags")}</a> -->
+      <LanguagePicker href={langSwitchHref} visible={langSwitchVisible} />
       <ThemeIcon />
     </div>
   </div>
@@ -51,7 +64,7 @@ import ThemeIcon from "./ThemeIcon.astro";
     text-align: center;
   }
 
-  .nav-links a {
+  .nav-links :global(a) {
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -61,8 +74,8 @@ import ThemeIcon from "./ThemeIcon.astro";
     padding: 0px 10px;
   }
 
-  a:hover,
-  .nav-links a:hover {
+  :global(.nav-links a:hover),
+  .nav-links :global(a:hover) {
     color: var(--accent);
   }
 </style>

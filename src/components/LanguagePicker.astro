@@ -1,0 +1,42 @@
+---
+import { languages, defaultLang, type Lang } from "../i18n/ui";
+import { getRelativeLocaleUrl, getOtherLang } from "../i18n/utils";
+
+interface Props {
+  href?: string;
+  visible?: boolean;
+}
+
+const { href, visible = true } = Astro.props;
+const currentLang = (Astro.currentLocale ?? defaultLang) as Lang;
+const otherLang = getOtherLang(currentLang);
+
+const targetHref =
+  href ??
+  getRelativeLocaleUrl(
+    otherLang,
+    Astro.url.pathname.replace(/^\/(pt|en)/, "") || "/",
+  );
+---
+
+{
+  visible ? (
+    <a href={targetHref} class="lang-switch" title={languages[otherLang]}>
+      {languages[otherLang]}
+    </a>
+  ) : null
+}
+
+<style>
+  .lang-switch {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--fg-dim);
+    padding: 0px 10px;
+    text-decoration: none;
+  }
+  .lang-switch:hover {
+    color: var(--accent);
+  }
+</style>

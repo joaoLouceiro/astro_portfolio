@@ -1,11 +1,19 @@
 ---
+import { defaultLang, type Lang } from "../i18n/ui";
+import { getRelativeLocaleUrl } from "../i18n/utils";
+
+interface Props {
+  tags: string[];
+}
+
 const { tags } = Astro.props;
+const lang = (Astro.currentLocale ?? defaultLang) as Lang;
 ---
 
 <div class="tags">
   {
-    tags.map((tag: any) => (
-      <a href={`/tags/${tag}`} class="tag link-no-underline">
+    tags.map((tag: string) => (
+      <a href={getRelativeLocaleUrl(lang, `tags/${tag}`)} class="tag link-no-underline">
         {tag}
       </a>
     ))
